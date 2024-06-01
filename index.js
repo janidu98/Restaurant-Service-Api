@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import restaurantRoutes from './routes/restaurantRoutes.js';
+import { errorHanlder } from './middlewares/errorHandler.js';
 
 dotenv.config();
 
@@ -25,3 +26,6 @@ mongoose.connect(process.env.MONGO_URI)
 
 //routing
 app.use('/api/restaurant', restaurantRoutes);
+
+//error handler middleware
+app.use(errorHanlder);

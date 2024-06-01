@@ -70,3 +70,32 @@ export const updateRestaurant = async (req, res, next) => {
     next(error);
   }
 };
+
+//delete a restaurant
+export const deleteRestaurant = async(req, res, next) => {
+    const restaurant = await Restaurant.findById(req.params.id);
+
+    if(!restaurant) {
+        return next(HttpException(404, 'Restaurant is not found!'));
+    }
+
+    try {
+        await Restaurant.findByIdAndDelete(req.params.id);
+        res.status(200).json('Restaurant has been deleted!');
+
+    } catch (error) {
+        next(error);
+    }
+}
+
+//get all restaurants
+export const getAllRestaurants = async(req, res, next) => {
+    try {
+        const allrestaurants = await Restaurant.find();
+
+        return res.status(200).json({data: allrestaurants});
+
+    } catch (error) {
+        next(error);
+    }
+}

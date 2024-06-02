@@ -64,7 +64,7 @@ export const updateRestaurant = async (req, res, next) => {
       { new: true }
     );
 
-    res.status(200).json(updatedRestaurant);
+    res.status(200).json({data: updatedRestaurant, message: 'Updated successfully'});
 
   } catch (error) {
     next(error);
